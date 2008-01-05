@@ -1,0 +1,14 @@
+== 0.1 / 2008-01-04 (vosechu)
+
+* 1 major enhancement
+  * Allows many-lined Erlang commands when using the Erlang class for direct
+    access. 
+* 3 minor enhancements
+  * Revised error checking to allow custom resolution
+  * stop_server/0 now shuts down any servers running in an erl shell
+  * created tests to run with RSpec and autotest (erl server must be running 
+    on port 9900).
+* 3 other changes
+  * Forked onto rubyforge complete with rdocs, gem, etc.
+  * Translated some comments into english as well as the README
+  * Packaged explicitly with gpl documentation

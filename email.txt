@@ -1,0 +1,40 @@
+Subject: [ANN] rbridge 0.1 Released
+
+rbridge version 0.1 has been released!
+
+* <by Chuck Vose (adapted from Toshi Hirooka's RulangBridge)>
+* <ruby-mnesia.rubyforge.com (originally http://code.google.com/p/rulangbridge/)>
+
+## FEATURES/PROBLEMS:
+  
+* Allows use of Erlang code within Ruby
+* Doesn't yet allow Ruby code within Erlang
+* Can't be started headless. Sockets are always closed.
+
+## SYNOPSIS:
+
+  1. Open an Erlang shell from the command line
+  $ erl
+
+  2. Start the RBridge server on some port (9900 is what the examples use)
+  1> rulang:start_server(9900).
+
+Changes:
+
+## 0.1 / 2008-01-04 (vosechu)
+
+* 1 major enhancement
+  * Allows many-lined Erlang commands when using the Erlang class for direct
+    access. 
+* 3 minor enhancements
+  * Revised error checking to allow custom resolution
+  * stop_server/0 now shuts down any servers running in an erl shell
+  * created tests to run with RSpec and autotest (erl server must be running 
+    on port 9900).
+* 3 other changes
+  * Forked onto rubyforge complete with rdocs, gem, etc.
+  * Translated some comments into english as well as the README
+  * Packaged explicitly with gpl documentation
+
+* <by Chuck Vose (adapted from Toshi Hirooka's RulangBridge)>
+* <ruby-mnesia.rubyforge.com (originally http://code.google.com/p/rulangbridge/)>
