@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: ErlangAdapter</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">ErlangAdapter</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/erlang_adapter_rb.html">
+                lib/erlang_adapter.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                Object
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+    <div id="diagram">
+      <map id="map" name="map">
+  <area shape="rect" coords="5,5,115,53"      href="ErlangAdapter.html" alt="ErlangAdapter" />
+</map>
+<img src="../dot/f_4.png" usemap="#map" border="0" alt="dot/f_4.png">
+    </div>
+
+    <div id="description">
+      <p>
+Erlang specific commands and evaluator
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000005">eval</a>&nbsp;&nbsp;
+      <a href="#M000009">is_error</a>&nbsp;&nbsp;
+      <a href="#M000006">make_command</a>&nbsp;&nbsp;
+      <a href="#M000004">new</a>&nbsp;&nbsp;
+      <a href="#M000007">to_erlang_args</a>&nbsp;&nbsp;
+      <a href="#M000008">to_erlang_literal</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="ErlangAdapter.src/M000004.html" target="Code" class="method-signature"
+            onclick="popupCode('ErlangAdapter.src/M000004.html');return false;">
+          <span class="method-name">new</span><span class="method-args">(host=&quot;localhost&quot;, port=9900)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+[Host] Erlang host server name (the default is &quot;localhost&quot;)
+[Port] Erlang server port number (the default is &quot;9900&quot;)
+</p>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="ErlangAdapter.src/M000005.html" target="Code" class="method-signature"
+            onclick="popupCode('ErlangAdapter.src/M000005.html');return false;">
+          <span class="method-name">eval</span><span class="method-args">(command)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Send commands to the Erlang server to be evaluated. Must have trailing
+whitespace to differentiate between floats and EOL.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="ErlangAdapter.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('ErlangAdapter.src/M000009.html');return false;">
+          <span class="method-name">is_error</span><span class="method-args">(str)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Quick boolean to decide whether the data returned from Erlang was an error.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="ErlangAdapter.src/M000006.html" target="Code" class="method-signature"
+            onclick="popupCode('ErlangAdapter.src/M000006.html');return false;">
+          <span class="method-name">make_command</span><span class="method-args">(erlang_mod, erlang_func, args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Create an Erlang command from the ruby-style syntax
+</p>
+<dl>
+<dt>erlang_mod</dt><dd>Erlang module
+
+</dd>
+<dt>erlang_func</dt><dd>Erlang function
+
+</dd>
+<dt>args</dt><dd>Arguments to pass to function. Should be in a Ruby array.
+
+</dd>
+</dl>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="ErlangAdapter.src/M000007.html" target="Code" class="method-signature"
+            onclick="popupCode('ErlangAdapter.src/M000007.html');return false;">
+          <span class="method-name">to_erlang_args</span><span class="method-args">(args)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Translate a Ruby array to Erlang elements.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="ErlangAdapter.src/M000008.html" target="Code" class="method-signature"
+            onclick="popupCode('ErlangAdapter.src/M000008.html');return false;">
+          <span class="method-name">to_erlang_literal</span><span class="method-args">(x)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+TODO: Make this handle hashes Convert Ruby objects to Erlang objects. Throw
+an error if the object passed isn&#8216;t a basic argument.
+</p>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
