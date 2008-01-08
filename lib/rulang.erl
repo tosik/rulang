@@ -1,6 +1,6 @@
 % RBridge - A Ruby to Erlang bridge allowing the use of Erlang commands within 
 % normal Ruby code.
-% Copyright (C) 2008 tosik <toshi.hirooka@gmail.com>, Chuck Vose <vosechu@gmail.com>
+% Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>, Chuck Vose <vosechu@gmail.com>
 % 
 % This program is free software; you can redistribute it and/or
 % modify it under the terms of the GNU General Public License
