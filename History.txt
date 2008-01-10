@@ -1,3 +1,16 @@
+== 0.1.2 / 2008-01-10 (vosechu)
+* major enhancements
+  * Runs headless by using the rulang command or via the command-line using the
+    -noshell switch to erl. 
+  
+* bugs / limitations
+  * rulang command isn't ready for prime time at all
+
+== 0.1.1 / 2008-01-07 (vosechu)
+* 2 minor enhancements
+  * auto-detect whether someone has put a period at the end of a set of exprs
+  * updated specs catch a few more edge cases
+
 == 0.1 / 2008-01-04 (vosechu)
 
 * 1 major enhancement

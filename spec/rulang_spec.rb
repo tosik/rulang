@@ -16,6 +16,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+# require 'rubygems'
+# require 'rbridge'
 require 'spec/spec_helper'
 
 describe "RBridge (erlang module)" do
@@ -81,5 +83,13 @@ describe "Direct Erlang code" do
   
   it "should evaluate mathematical expressions" do
     @e_raw.erl("10*10.").should eql(100)
+  end
+  
+  it "should evaluate multiple expressions seperated by commas" do
+    @e_raw.erl("QH = [1,2,3,4,5], erlang:length(QH).").should eql(5)
+  end
+  
+  it "should add a period if there isn't one at the end of an expression" do
+    @e_raw.erl("QH = [1,2,3,4,5], erlang:length(QH)").should eql(5)
   end
 end

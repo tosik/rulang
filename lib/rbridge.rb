@@ -1,6 +1,6 @@
 # RBridge - A Ruby to Erlang bridge allowing the use of Erlang commands within 
 # normal Ruby code.
-# Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>, Chuck Vose <vosechu@gmail.com>
+# Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>
 # 
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,13 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 require "socket"
-require "erlang_adapter"
+require "lib/erlang_adapter"
 
 #
 # Erlang サーバの関数を Ruby のメソッドのように扱えるようにするクラス
 #
 class RBridge
-  VERSION = "0.1"
+  VERSION = "0.1.2"
   
   # [Mod]
   # Erlang module to use when using ruby-style access (the default is "erlang")

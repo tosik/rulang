@@ -1,0 +1,8 @@
+Original Creator:
+  Toshiyuki Hirooka <toshi.hirooka@gmail.com
+  
+Additional Patches and English Translation by:
+  Chuck Vose <vosechu@gmail.com>
+  
+Additional Patches and Windows Testing by:
+ Sean Steiger-McRae <larreh@gmail.com>

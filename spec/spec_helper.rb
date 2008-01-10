@@ -14,6 +14,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+require 'lib/vosetools'
+include Vosetools
+
 exclude = ['spec/spec_helper.rb', 'lib/rulang.erl', 'lib/rulang.beam']
 
 Dir.glob('lib/*').each do |file|
@@ -22,9 +25,9 @@ Dir.glob('lib/*').each do |file|
   end
 end
 
-Dir.glob('spec/*').each do |file|
-  unless exclude.include?(file)
-    require file
-    # log_p "requiring #{file}"
-  end
-end
+# Dir.glob('spec/*').each do |file|
+#   unless exclude.include?(file)
+#     require file
+#     # log_p "requiring #{file}"
+#   end
+# end

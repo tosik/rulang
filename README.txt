@@ -1,18 +1,17 @@
 rbridge
-    by Chuck Vose (adapted from Toshiyuki Hirooka's RulangBridge)
-    ruby-mnesia.rubyforge.com (originally http://code.google.com/p/rulangbridge/)
+ruby-mnesia.rubyforge.com
+by Toshiyuki Hirooka, Chuck Vose, Sean Steiger-McRae
 
 == DESCRIPTION:
-  
+
 RBridge allows the use of Erlang code within a Ruby program. Optionally allowing
 asynchronous access and ruby-like syntax or by using Erlang code directly when
 more expressive or complex code is needed.
 
 == FEATURES/PROBLEMS:
-  
+
 * Allows use of Erlang code within Ruby
 * Doesn't yet allow Ruby code within Erlang
-* Can't be started headless. Sockets are always closed.
 
 == SYNOPSIS:
 
@@ -46,7 +45,7 @@ more expressive or complex code is needed.
 * Erlang (erlang.org) -
   There are current windows binaries as well as source for other oses. Installing
   on OS X should just need: ./configure --prefix=/opt/local && make && sudo make install.
-  
+
 * Ruby (ruby-lang.org) -
   On the downloads page if you skip past the source downloads there are a lot
   of one-click installers for various oses. If you go with source you at least
@@ -54,14 +53,13 @@ more expressive or complex code is needed.
 
 == INSTALL:
 
-* sudo gem install rulang
+* sudo gem install rbridge
 
 == LICENSE:
 
 RBridge - A Ruby to Erlang bridge allowing the use of Erlang commands within 
 normal Ruby code.
-Copyright (C) 2007 Toshiyuki Hirooka
-Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>, Chuck Vose <vosechu@gmail.com>
+Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

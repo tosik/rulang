@@ -1,6 +1,6 @@
 # RBridge - A Ruby to Erlang bridge allowing the use of Erlang commands within 
 # normal Ruby code.
-# Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>, Chuck Vose <vosechu@gmail.com>
+# Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>
 # 
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -36,7 +36,8 @@ class ErlangAdapter
 		
     # There has to be a trailing space at the end of a command for erl_scan:tokens
     # to process the string.
-		command << " " if command[-1] != " "
+    command << '.' if command.scan(/\.\w*/).empty?
+		command << " "
 		socket.write(command)
 		socket.read # ...?
 	end

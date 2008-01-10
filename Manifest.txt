@@ -1,12 +1,14 @@
-FORK.txt
+.DS_Store
+Authors.txt
 GPL.txt
 History.txt
 Manifest.txt
 README.txt
 Rakefile
+bin/rulang
+bin/rulang.erl
 lib/erlang_adapter.rb
 lib/rbridge.rb
-lib/rulang.beam
-lib/rulang.erl
+lib/vosetools.rb
 spec/rulang_spec.rb
 spec/spec_helper.rb

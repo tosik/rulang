@@ -1,6 +1,6 @@
 % RBridge - A Ruby to Erlang bridge allowing the use of Erlang commands within 
 % normal Ruby code.
-% Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>, Chuck Vose <vosechu@gmail.com>
+% Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>
 % 
 % This program is free software; you can redistribute it and/or
 % modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 start_server(Port) ->
 	{ok, ListenSocket} = gen_tcp:listen(Port, [binary, {packet, 0}, {active, false}]),
 	io:format("[RBridge Server Started]~n"),
-	spawn(rulang, loop, [ListenSocket]).
+	loop(ListenSocket).
 	
 
 % Just kill the parent thread.
@@ -42,13 +42,7 @@ loop(ListenSocket) ->
 	  {ok, Socket} -> 
 	    spawn_link(rulang, handle_connection, [Socket]),
       % Continue the loop
-	    loop(ListenSocket);
-	    
-    % The connection is broken so we should display the error to the console
-    % and drop the server so the heartbeat process can try to restart it.
-	  {error, Reason} -> 
-	    error_logger:error_report(Reason),
-	    stop_server()
+	    loop(ListenSocket)
   end.
 	
 % Wrapper that catches errors and closes the socket after we're done with it.

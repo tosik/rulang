@@ -1,0 +1,14 @@
+#!/bin/bash
+
+P=9900
+
+if [ $1 ]
+then 
+  P=$1
+else 
+  P=9900
+fi
+
+cd bin
+erlc rulang.erl
+erl -eval "rulang:start_server($P)" -noshell &
