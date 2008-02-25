@@ -6,9 +6,9 @@ Manifest.txt
 README.txt
 Rakefile
 bin/rulang
-bin/rulang.erl
 lib/erlang_adapter.rb
 lib/rbridge.rb
 lib/vosetools.rb
+rulang_server/rulang
 spec/rulang_spec.rb
 spec/spec_helper.rb

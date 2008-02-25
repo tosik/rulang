@@ -15,13 +15,9 @@ more expressive or complex code is needed.
 
 == SYNOPSIS:
 
-  1. Open an Erlang shell from the command line
-  $ erl
+  1. Start an instance of the rulang server by using bin/rulang
 
-  2. Start the RBridge server on some port (9900 is what the examples use)
-  1> rulang:start_server(9900).
-
-  3. Execute your ruby code by connecting (as shown below) to either the RBridge class if you want
+  2. Execute your ruby code by connecting (as shown below) to either the RBridge class if you want
   asynchronous access and ruby style code access, or by connecting to the Erlang
   class if you need more complicated code evaluation.
 
