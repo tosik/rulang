@@ -23,7 +23,7 @@ require "erlang_adapter"
 # Erlang サーバの関数を Ruby のメソッドのように扱えるようにするクラス
 #
 class RBridge
-  VERSION = "0.1.2"
+  VERSION = "0.2.0"
   
   # [Mod]
   # Erlang module to use when using ruby-style access (the default is "erlang")
