@@ -6,7 +6,7 @@ require './lib/rbridge.rb'
 
 Hoe.new('rbridge', RBridge::VERSION) do |p|
   p.rubyforge_name = 'ruby-mnesia'
-  p.author = ['Chuck Vose', 'Toshiyuki Hirooka', 'Sean Steiger-McRae']
+  p.author = ['Chuck Vose', 'Toshiyuki Hirooka']
   p.email = 'vosechu@gmail.com'
   p.summary = 'RBridge allows the use of Erlang code within the Ruby environment'
   p.description = p.paragraphs_of('README.txt', 1..4).join("\n\n")

@@ -1,4 +1,4 @@
 #!/usr/local/bin/ruby -ws
 
 server_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "rulang_server"))
-exec "escript #{File.join(server_path, "rulang")}"
+exec "cd #{server_path}; erlc rulang.erl; erl -detached -eval 'rulang:start_server(#{ARGV[0]})' && echo '[Rulang Server Started]'"

@@ -1,6 +1,6 @@
 # RBridge - A Ruby to Erlang bridge allowing the use of Erlang commands within 
 # normal Ruby code.
-# Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>
+# Copyright (C) 2008 Toshiyuki Hirooka <toshi.hirooka@gmail.com>, Chuck Vose <vosechu@gmail.com>
 # 
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 require "socket"
-require "lib/erlang_adapter"
+require "erlang_adapter"
 
 #
 # Erlang サーバの関数を Ruby のメソッドのように扱えるようにするクラス
@@ -56,25 +56,45 @@ class RBridge
 		erl(command, block)
 	end
 	
-  # Send commands to Erlang to be processed.
-	def erl(command, block=nil)
-		begin
-			if @async == true then
-				# If we're asynchronous generate a thread around the call then pass 
-        # the results back to a block to display.
-				Thread.new do
-					res = @erlang.eval(command)
-					raise res if @erlang.is_error(res)
-					block.call(eval(res))
-				end
-			elsif @async == false then
-				# Blocking mode should just eval and wait for data to come back.
-				res = @erlang.eval(command)
-				raise res if @erlang.is_error(res)
-				eval res
-			end
-		rescue => res
-			raise "[Error]=>#{res}"
-		end
+	def sql_erl(command, block=nil)
+	  
+    # require 'ruby-debug'
+    # debugger
+	  
+	  res = command.scan(/[^\ ]+/)
+	  case res[0]
+    when /select/i
+      erl_command = "Q = qlc:q([X || X <- mnesia:table(#{res[3]})]),
+                     F = fun() -> qlc:e(Q) end, 
+                     {atomic, Val} = mnesia:transaction(F), 
+                     Val."
+    else
+      erl_command = nil
+    end
+	  
+	  puts erl_command
+	  erl(erl_command, block)
   end
+	
+  # Send commands to Erlang to be processed.
+  def erl(command, block=nil)
+    begin
+      if @async == true then
+        # If we're asynchronous generate a thread around the call then pass 
+          # the results back to a block to display.
+        Thread.new do
+          res = @erlang.eval(command)
+          raise res if @erlang.is_error(res)
+          block.call(eval(res))
+        end
+      elsif @async == false then
+        # Blocking mode should just eval and wait for data to come back.
+        res = @erlang.eval(command)
+        raise res if @erlang.is_error(res)
+        eval res
+      end
+    rescue => res
+      raise "[Error]=>#{res}"
+    end
+    end
 end
