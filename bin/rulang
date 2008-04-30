@@ -1,4 +1,9 @@
 #!/usr/local/bin/ruby -ws
 
 server_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "rulang_server"))
-exec "cd #{server_path}; erlc rulang.erl; erl -detached -eval 'rulang:start_server(#{ARGV[0]})' && echo '[Rulang Server Started]'"
+port = ARGV[0] || 9900
+working_path = File.expand_path(ARGV[1]) || server_path
+mnesia_file = File.expand_path(ARGV[2]) if ARGV[2] && File.directory?(File.expand_path(ARGV[2]))
+
+puts `cd #{server_path}; erlc -o #{working_path} rulang.erl`
+puts `cd #{working_path}; erl -detached -mnesia #{"dir '\"#{mnesia_file}\"'" if mnesia_file} -eval 'rulang:main([9900])'`

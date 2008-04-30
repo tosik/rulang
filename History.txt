@@ -1,6 +1,7 @@
 == 0.2.0 / 2008-04-24 (vosechu)
 * major enhancements
-  * Actually runs headless via the rulang command. Requires root to build the beam file in gem directory. This will go away so that the beam can be built anywhere. 
+  * Actually runs headless via the rulang command. 
+  * Allows you to specify beam directory so you don't need to be root.
 
 == 0.1.2 / 2008-01-10 (vosechu)
 * major enhancements

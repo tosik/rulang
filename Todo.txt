@@ -1,0 +1,5 @@
+- Get the erlang adaptor to handle hashes
+- Add error checking to the rulang server for things like servers already running on a port. 
+- Build more tests, specifically the standard CRUD and a few join queries. 
+- Make it possible to specify where to create the mnesia database file. 
+- Make it possible to specify where the beam file is compiled to.
