@@ -18,12 +18,9 @@
 % Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 -module(rulang).
 -export([start_server/1, stop_server/0, loop/1, handle_connection/1, main/1, usage/0]).
--include_lib("stdlib/include/qlc.hrl").
 
 main([Port]) ->
   try
-    mnesia:create_schema([node()]),
-    mnesia:start(),
     start_server(Port)
   catch
     _:_ ->
@@ -39,13 +36,9 @@ usage() ->
 % Start a server and connect to the port specified by the bound variable Port.
 % If all goes according to plan start the rulang loop and display a happy message.
 start_server(Port) ->
-	case gen_tcp:listen(Port, [binary, {packet, 0}, {active, true}]) of
-	  {ok, ListenSocket} ->
-    	io:format("[RBridge Server Started]~n"),
-    	loop(ListenSocket);
-    {error, Reason} ->
-      io:format(Reason)
-  end.
+	{ok, ListenSocket} = gen_tcp:listen(Port, [binary, {packet, 0}, {active, false}]),
+	io:format("[RBridge Server Started]~n"),
+	loop(ListenSocket).
 
 % Just kill the parent thread.
 stop_server() ->

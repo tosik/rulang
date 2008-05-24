@@ -1,7 +1,11 @@
 == 0.2.0 / 2008-04-24 (vosechu)
-* major enhancements
+* 1 major enhancement
   * Actually runs headless via the rulang command. 
-  * Allows you to specify beam directory so you don't need to be root.
+  
+* 3 minor enhancements
+  * Uses optparse for clearer command-line options.
+  * Option to specify port, compile directory, mnesia directory, sname, and location of server file.
+  * Some error checking, and debug output added. Checks to see if server is already running on specified port.
 
 == 0.1.2 / 2008-01-10 (vosechu)
 * major enhancements

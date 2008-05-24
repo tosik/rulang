@@ -1,9 +1,68 @@
-#!/usr/local/bin/ruby -ws
+#!/usr/local/bin/ruby -w
 
-server_path = File.expand_path(File.join(File.dirname(__FILE__), "..", "rulang_server"))
-port = ARGV[0] || 9900
-working_path = File.expand_path(ARGV[1]) || server_path
-mnesia_file = File.expand_path(ARGV[2]) if ARGV[2] && File.directory?(File.expand_path(ARGV[2]))
+require 'optparse'
 
-puts `cd #{server_path}; erlc -o #{working_path} rulang.erl`
-puts `cd #{working_path}; erl -detached -mnesia #{"dir '\"#{mnesia_file}\"'" if mnesia_file} -eval 'rulang:main([9900])'`
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: rulang [options]"
+  
+  # Default of port 9900 and compiling the beam in the same folder as the erlang file.
+  options[:port] = 9900
+  options[:server_path] = File.expand_path(File.join(File.dirname(__FILE__), "..", "rulang_server"))
+  options[:beam_path] = options[:server_path]
+
+  opts.on("-v", "--verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+  opts.on("-q", "--quiet", "Run quietly") do |q|
+    options[:quiet] = q
+  end
+  opts.on("-p", "--port Port", "Port Number to Connect To") do |p|
+    options[:port] = p
+  end
+  opts.on("-o", "--beam-path Path", "Path to Compile To") do |o|
+    options[:beam_path] = File.expand_path(o)
+  end
+  opts.on("-m", "--mnesia-path Path", "Path to Mnesia Directory") do |m|
+    options[:mnesia_path] = m
+  end
+  opts.on("-s", "--sname", "Node Name for Clustering") do |s|
+    options[:sname] = s
+  end
+  opts.on("--server-path", "Path to rulang.erl") do |sp|
+    options[:server_path] = sp
+  end
+  
+  opts.on_tail("-h", "--help", "Show this message") do
+    puts opts
+    exit
+  end
+  
+  opts.on_tail("--version", "Show version") do
+    puts OptionParser::Version.join('.')
+    exit
+  end
+end.parse!
+
+# Find out if there's already a beam file on this port
+pid = `ps ax | grep beam | grep -v grep | grep 'rulang:main(\\\[#{options[:port]}\\\])'`
+if pid && !pid.empty?
+  puts "Server already running on #{options[:port]}"
+  exit
+end
+
+# Commands to execute
+compile = "erlc -o #{options[:beam_path]} #{File.join(options[:server_path], "rulang.erl")}"
+start = "cd #{options[:beam_path]}; erl #{"-sname #{options[:sname]}" if options[:sname]} -detached -mnesia #{"dir '\"#{options[:mnesia_path]}\"'" if options[:mnesia_path]} -eval 'rulang:main([#{options[:port]}])'"
+
+# Debug output
+puts "Commands", compile, start if ENV['DEBUG'] == 'true'
+
+puts "[Rulang Server]\n" unless options[:quiet]
+puts "Compiling rulang beam...\n" if options[:verbose]
+`#{compile}`
+puts "Starting rulang server...\n" if options[:verbose]
+`#{start}`
+puts "Compile path: '#{options[:beam_path]}'\n" if options[:verbose]
+puts "Mnesia path: '#{File.expand_path(options[:mnesia_path])}'\n" if options[:mnesia_path] && options[:verbose]
+puts "PID: " + `ps ax | grep beam | grep -v grep | tail -n1 | cut -f 2 -d " "` if options[:verbose]

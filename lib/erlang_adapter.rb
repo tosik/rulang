@@ -31,9 +31,9 @@ class ErlangAdapter
 
 	# Send commands to the Erlang server to be evaluated. Must have trailing 
   # whitespace to differentiate between floats and EOL.
-	def eval(command)
+	def eval(command)		
 		socket = TCPSocket.new(@host, @port)
-		
+				
     # There has to be a trailing space at the end of a command for erl_scan:tokens
     # to process the string.
     command << '.' if command.scan(/\.\w*/).empty?

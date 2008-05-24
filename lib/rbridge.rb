@@ -56,28 +56,25 @@ class RBridge
 		erl(command, block)
 	end
 	
-	def sql_erl(command, block=nil)
-	  
-    # require 'ruby-debug'
-    # debugger
-	  
-	  res = command.scan(/[^\ ]+/)
-	  case res[0]
-    when /select/i
-      erl_command = "Q = qlc:q([X || X <- mnesia:table(#{res[3]})]),
-                     F = fun() -> qlc:e(Q) end, 
-                     {atomic, Val} = mnesia:transaction(F), 
-                     Val."
-    else
-      erl_command = nil
-    end
-	  
-	  puts erl_command
-	  erl(erl_command, block)
-  end
+  # def sql_erl(command, block=nil)
+  #   res = command.scan(/[^\ ]+/)
+  #   case res[0]
+  #     when /select/i
+  #       erl_command = "Q = qlc:q([X || X <- mnesia:table(#{res[3]})]),
+  #                      F = fun() -> qlc:e(Q) end, 
+  #                      {atomic, Val} = mnesia:transaction(F), 
+  #                      Val."
+  #     else
+  #       erl_command = nil
+  #     end
+  #   
+  #   puts erl_command
+  #   erl(erl_command, block)
+  #   end
 	
   # Send commands to Erlang to be processed.
   def erl(command, block=nil)
+    # log_p command   
     begin
       if @async == true then
         # If we're asynchronous generate a thread around the call then pass 
@@ -96,5 +93,9 @@ class RBridge
     rescue => res
       raise "[Error]=>#{res}"
     end
-    end
+  end
+  
+  # def tv
+  #   erl("tv:start().")
+  # end
 end
