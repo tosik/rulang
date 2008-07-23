@@ -33,7 +33,6 @@ end
 # end
 
 dir = File.dirname(__FILE__)
-RULANG_PID_CMD = "ps ax | grep rulang | sed /grep/d | awk '{print $1}'"
 
 def wait_for(time=10)
   Timeout.timeout(time) do
