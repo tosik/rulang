@@ -73,11 +73,13 @@ class RBridge
   #   end
 	
   # Send commands to Erlang to be processed.
-  def erl(command, block=nil)
-    # log_p command   
+  def erl(commands, block=nil)
+    command = commands.is_a?(Array) ? commands.join(',') : commands
+
+    # log_p command
     begin
       if @async == true then
-        # If we're asynchronous generate a thread around the call then pass 
+        # If we're asynchronous generate a thread around the call then pass
           # the results back to a block to display.
         Thread.new do
           res = @erlang.eval(command)
@@ -94,7 +96,7 @@ class RBridge
       raise "[Error]=>#{res}"
     end
   end
-  
+
   # def tv
   #   erl("tv:start().")
   # end

@@ -92,4 +92,10 @@ describe "Direct Erlang code" do
   it "should add a period if there isn't one at the end of an expression" do
     @e_raw.erl("QH = [1,2,3,4,5], erlang:length(QH)").should eql(5)
   end
+
+  context "when passed an Array" do
+    it "should group the commands into an expression list" do
+      @e_raw.erl(["X=1", "X"]).should eql(1)
+    end
+  end
 end
