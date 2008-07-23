@@ -41,7 +41,7 @@ class ErlangAdapter
       socket.write(command)
       socket.read # ...?
     ensure
-      socket
+      socket.close
     end
   end
 
