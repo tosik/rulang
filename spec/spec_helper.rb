@@ -35,15 +35,6 @@ end
 dir = File.dirname(__FILE__)
 RULANG_PID_CMD = "ps ax | grep rulang | sed /grep/d | awk '{print $1}'"
 
-def kill_rulang
-  puts "killing rulang"
-  system "#{RULANG_PID_CMD} | xargs kill 2>/dev/null"
-#  p RBridge.new("erlang", "localhost", 9900).erl("rulang:stop_server().")
-  wait_for do
-    `#{RULANG_PID_CMD}`.chomp.empty?
-  end
-end
-
 def wait_for(time=10)
   Timeout.timeout(time) do
     loop do
@@ -52,7 +43,6 @@ def wait_for(time=10)
   end
 end
 
-kill_rulang
 system("#{dir}/../bin/rulang -v")
 
 begin
@@ -65,14 +55,5 @@ begin
     rescue Errno::ECONNRESET => e
       false
     end
-  end
-rescue Exception => e
-  kill_rulang
-  raise e
-end
-
-Spec::Example::ExampleMethods.instance_eval do
-  after(:suite) do
-    kill_rulang
   end
 end
