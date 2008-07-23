@@ -48,7 +48,7 @@ OptionParser.new do |opts|
 end.parse!
 
 # Find out if there's already a beam file on this port
-pid = `ps ax | grep beam | grep -v grep | grep 'rulang:main(\\\[#{options[:port]}\\\])'`
+pid = `ps ax | grep beam | grep -v grep | grep 'rulang:main(\\\[#{options[:port]}\\\])' | cut -f 1 -d " "`
 if pid && !pid.empty?
   puts "Server already running on #{options[:port]}"
   if options[:kill]
