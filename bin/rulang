@@ -29,6 +29,9 @@ OptionParser.new do |opts|
   opts.on("-s", "--sname", "Node Name for Clustering") do |s|
     options[:sname] = s
   end
+  opts.on("-k", "--kill", "kill the running rulang server") do |k|
+    options[:kill] = k
+  end
   opts.on("--server-path", "Path to rulang.erl") do |sp|
     options[:server_path] = sp
   end
@@ -48,6 +51,10 @@ end.parse!
 pid = `ps ax | grep beam | grep -v grep | grep 'rulang:main(\\\[#{options[:port]}\\\])'`
 if pid && !pid.empty?
   puts "Server already running on #{options[:port]}"
+  if options[:kill]
+    puts "Killing existing server"
+    system("kill #{pid}")
+  end
   exit
 end
 
