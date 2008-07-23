@@ -1,4 +1,4 @@
-#!/usr/local/bin/ruby -w
+#!/usr/bin/env ruby
 
 require 'optparse'
 
@@ -65,4 +65,4 @@ puts "Starting rulang server...\n" if options[:verbose]
 `#{start}`
 puts "Compile path: '#{options[:beam_path]}'\n" if options[:verbose]
 puts "Mnesia path: '#{File.expand_path(options[:mnesia_path])}'\n" if options[:mnesia_path] && options[:verbose]
-puts "PID: " + `ps ax | grep beam | grep -v grep | tail -n1 | cut -f 2 -d " "` if options[:verbose]
+puts "PID: " + `ps ax | grep beam | grep -v grep | tail -n1 | cut -f 1 -d " "` if options[:verbose]

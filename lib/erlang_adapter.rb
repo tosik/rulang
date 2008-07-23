@@ -33,14 +33,17 @@ class ErlangAdapter
   # whitespace to differentiate between floats and EOL.
 	def eval(command)		
 		socket = TCPSocket.new(@host, @port)
-				
-    # There has to be a trailing space at the end of a command for erl_scan:tokens
-    # to process the string.
-    command << '.' if command.scan(/\.\w*/).empty?
-		command << " "
-		socket.write(command)
-		socket.read # ...?
-	end
+	  begin
+      # There has to be a trailing space at the end of a command for erl_scan:tokens
+      # to process the string.
+      command << '.' if command.scan(/\.\w*/).empty?
+      command << " "
+      socket.write(command)
+      socket.read # ...?
+    ensure
+      socket.close
+    end
+  end
 
 	# Create an Erlang command from the ruby-style syntax
 	# [erlang_mod]
