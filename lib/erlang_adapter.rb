@@ -41,7 +41,7 @@ class ErlangAdapter
       socket.write(command)
       socket.read # ...?
     ensure
-      socket.close
+      socket
     end
   end
 
@@ -67,7 +67,9 @@ class ErlangAdapter
 	def to_erlang_literal(x)
 		if x.kind_of?(String) then
 			"\"#{x}\""
-		elsif x.kind_of?(Integer) then
+    elsif x.kind_of?(Symbol) then
+      x.to_s
+    elsif x.kind_of?(Integer) then
 			x
 		elsif x.kind_of?(Float) then
 			x

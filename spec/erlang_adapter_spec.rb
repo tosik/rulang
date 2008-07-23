@@ -20,3 +20,15 @@
 # require 'rbridge'
 require "#{File.dirname(__FILE__)}/spec_helper"
 
+describe ErlangAdapter do
+  attr_reader :adapter
+  before do
+    @adapter = ErlangAdapter.new
+  end
+
+  describe "#to_erlang_literal" do
+    it "converts Symbols to atoms" do
+      adapter.to_erlang_literal(:an_atom).should == "an_atom"
+    end
+  end
+end
