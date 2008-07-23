@@ -18,7 +18,7 @@
 
 # require 'rubygems'
 # require 'rbridge'
-require 'spec/spec_helper'
+require "#{File.dirname(__FILE__)}/spec_helper"
 
 describe "RBridge (erlang module)" do
   before(:each) do
